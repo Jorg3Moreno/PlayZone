@@ -20,10 +20,15 @@ import './media.css';
     11. ComponentDidCatch.- called if there are any error when the component is
         rendering.
 */
+
 class Media extends PureComponent {
+    handleClick = (event) => {
+        this.props.openModal(this.props);
+    }
+
     render() {
         return (
-            <div className="Media" onClick={this.props.handleClick}>
+            <div className="Media" onClick={this.handleClick}>
                 <div className="Media-cover">
                     <img
                         className="Media-image"

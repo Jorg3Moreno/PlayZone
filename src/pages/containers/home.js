@@ -14,9 +14,10 @@ class Home extends Component {
     }
 
     // to open modal when click on Media Component
-    handleOpenModal = () => {
+    handleOpenModal = (media) => {
         this.setState({
-            modalVisible: true
+            modalVisible: true,
+            media: media
         });
     }
 
@@ -42,6 +43,8 @@ class Home extends Component {
                             <Modal handleClick={this.handleCloseModal}>
                                 <VideoPlayer
                                     autoplay
+                                    src = {this.state.media.src}
+                                    title = {this.state.media.title}
                                 />
                             </Modal>
                         </ModalContainer>
