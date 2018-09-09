@@ -1,36 +1,43 @@
 import React, {Component} from 'react';
 import Search from './../components/search';
+import { connect } from 'react-redux';
 
 class SearchContainer extends Component {
-  state = {
-    value: ''
-  }
+    state = {
+        value: ''
+    };
 
-  handleSubmit = event => {
-    event.preventDefault();
-    console.log(this.input.value, 'submit');
-  }
+    handleSubmit = event => {
+        event.preventDefault();
+        console.log(this.input.value, 'submit');
+        this.props.dispatch({
+            type: 'SEARCH_VIDEO',
+            payload: {
+                query: this.input.value
+            }
+        })
+    };
 
-  handleInputChange = event => {
-    this.setState({
-      value: event.target.value.replace(' ', '-')
-    });
-  }
+    handleInputChange = event => {
+        this.setState({
+            value: event.target.value.replace(' ', '-')
+        });
+    };
 
-  setInputRef = element => {
-    this.input = element;
-  }
+    setInputRef = element => {
+        this.input = element;
+    };
 
-  render() {
-    return(
-      <Search
-        setRef={this.setInputRef}
-        handleChange={this.handleInputChange}
-        handleSubmit={this.handleSubmit}
-        value={this.state.value}
-      />
-    );
-  }
+    render() {
+        return(
+            <Search
+                setRef={this.setInputRef}
+                handleChange={this.handleInputChange}
+                handleSubmit={this.handleSubmit}
+                value={this.state.value}
+            />
+        );
+    }
 }
 
-export default SearchContainer;
+export default connect()(SearchContainer);
