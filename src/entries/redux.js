@@ -9,7 +9,12 @@ function handleSubmit(event) {
     event.preventDefault();
     const data = new FormData($form);
     const title = data.get('title');
-    console.log(title);
+    store.dispatch({
+        type: 'ADD_SONG',
+        payload: {
+            title
+        }
+    })
 }
 
 const initialState = [
@@ -24,9 +29,18 @@ const initialState = [
     }
 ];
 
+const reducer = (state, action) => {
+    switch (action.type) {
+        case 'ADD_SONG':
+            return [...state, action.payload];
+        default:
+            return state;
+    }
+};
+
 const store = createStore(
     //reducer
-    (state) => state,
+    reducer,
     //initialState
     initialState,
     //enhancer
