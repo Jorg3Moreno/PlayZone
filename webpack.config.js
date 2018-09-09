@@ -6,7 +6,7 @@ const CleanWebpackPlugin = require('clean-webpack-plugin');
 module.exports = (env) => {
   const plugins = [
     new ExtractTextPlugin("css/[name].css")
-  ]
+  ];
 
   if (env.NODE_ENV === 'production') {
     plugins.push(
@@ -18,6 +18,7 @@ module.exports = (env) => {
 
     entry: {
       "home": path.resolve(__dirname, 'src/entries/home.js'),
+      "redux": path.resolve(__dirname, 'src/entries/redux.js')
     },
     output: {
       path: path.resolve(__dirname, 'dist'),
@@ -70,4 +71,4 @@ module.exports = (env) => {
     },
     plugins
   }
-}
+};
