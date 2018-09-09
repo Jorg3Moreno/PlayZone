@@ -10,7 +10,13 @@ function Volume(props) {
         color="white"
       />
       <div className="Volume-range">
-        <input type="range" />
+          <input
+              type="range"
+              min={0}
+              max={1}
+              value={props.value}
+              onChange={props.handleVolumeChange}
+          />
       </div>
     </button>
   );
