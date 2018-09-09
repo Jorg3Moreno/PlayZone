@@ -6,12 +6,13 @@ import ModalContainer from '../../widgets/containers/modal';
 import Modal from '../../widgets/components/modal';
 import HandleError from '../../error/containers/handle-error';
 import VideoPlayer from '../../player/containers/video-player';
+import { connect } from 'react-redux';
 
 class Home extends Component {
 
     state = {
         modalVisible: false
-    }
+    };
 
     // to open modal when click on Media Component
     handleOpenModal = (media) => {
@@ -19,14 +20,14 @@ class Home extends Component {
             modalVisible: true,
             media: media
         });
-    }
+    };
 
     // to close modal
     handleCloseModal = (event) => {
         this.setState({
             modalVisible: false
         });
-    }
+    };
 
     render() {
         return (
@@ -55,4 +56,10 @@ class Home extends Component {
     }
 }
 
-export default Home;
+function mapStateToProps(state, props) {
+    return {
+        categories: state.data.categories
+    }
+}
+
+export default connect(mapStateToProps)(Home);
