@@ -13,8 +13,13 @@ function Categories(props) {
                     return item.map((item) => {
                         return (
                             <Media
-                                {...item}
-                                key={item.id}
+                                title  = {item.get('title')}
+                                author = {item.get('author')}
+                                type   = {item.get('type')}
+                                cover  = {item.get('cover')}
+                                src    = {item.get('src')}
+                                id     = {item.get('id')}
+                                key    = {item.get('id')}
                                 openModal={props.handleClick}
                             />
                         )
@@ -25,9 +30,11 @@ function Categories(props) {
                 props.categories.map((item) => {
                     return (
                         <Category
-                            key={item.id}
-                            {...item}
-                            handleClick={props.handleClick}
+                            description     = {item.get('description')}
+                            title           ={item.get('title')}
+                            playlist        ={item.get('playlist')}
+                            key             ={item.get('id')}
+                            handleOpenModal ={props.handleClick}
                         />
                     )
                 })
