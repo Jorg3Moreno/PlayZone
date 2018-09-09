@@ -7,6 +7,7 @@ import Modal from '../../widgets/components/modal';
 import HandleError from '../../error/containers/handle-error';
 import VideoPlayer from '../../player/containers/video-player';
 import { connect } from 'react-redux';
+import { List as list } from 'immutable';
 
 class Home extends Component {
 
@@ -62,9 +63,19 @@ function mapStateToProps(state, props) {
         return state.get('data').get('entities').get('categories').get(categoryId)
     });
 
+    const search = state.get('data').get('search');
+
+    let results = list();
+
+    if (search) {
+        results = state.get('data').get('entities').get('media').filter( (item) => {
+            return item.get('author').toLowerCase().includes(search.toLowerCase()) || item.get('title').toLowerCase().includes(search.toLowerCase());
+        }).toList();
+    }
+
     return {
         categories: categories,
-        search: state.get('data').get('search')
+        search: results
     }
 }
 
