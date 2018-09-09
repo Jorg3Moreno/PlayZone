@@ -1,4 +1,12 @@
-function data(state, action) {
+import normalizedData from "../schemas";
+
+const initialState = {
+    entities: normalizedData.entities,
+    categories: normalizedData.result.categories,
+    search: []
+};
+
+function data(state = initialState, action) {
     switch (action.type) {
         case 'SEARCH_VIDEO': {
             let results = [];
