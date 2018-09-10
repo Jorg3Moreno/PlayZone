@@ -2,7 +2,7 @@ import {
     CLOSE_MODAL,
     OPEN_MODAL,
     SEARCH_ENTITIES,
-    SEARCH_ASYNC_ENTITIES
+    IS_LOADING
 } from "../action-types";
 
 export function openModal(mediaId) {
@@ -29,11 +29,22 @@ export function searchEntities(query) {
     };
 }
 
+export function isLoading(value) {
+    return {
+        type: IS_LOADING,
+        payload: {
+            value: value
+        }
+    }
+}
+
 export function searchAsyncEntities(query) {
     return (dispatch) => {
         // HERE FETCH OR XMLHTTPREQUEST
+        dispatch(isLoading(true));
         setTimeout(() => {
-            dispatch(searchEntities(query))
+            dispatch(isLoading(false));
+            dispatch(searchEntities(query));
         }, 5000)
     }
 }

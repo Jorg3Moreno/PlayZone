@@ -8,7 +8,10 @@ import HandleError from '../../error/containers/handle-error';
 import VideoPlayer from '../../player/containers/video-player';
 import { connect } from 'react-redux';
 import { List as list } from 'immutable';
-import { openModal, closeModal } from "../../actions";
+import {
+    openModal,
+    closeModal
+} from "../../actions";
 
 class Home extends Component {
 
@@ -42,6 +45,7 @@ class Home extends Component {
                         categories={this.props.categories}
                         handleClick={this.handleOpenModal}
                         search={this.props.search}
+                        isLoading={this.props.isLoading}
                     />
                     {
                         this.props.modal.get('visibility') &&
@@ -82,7 +86,8 @@ function mapStateToProps(state, props) {
     return {
         categories: categories,
         search: results,
-        modal: state.get('modal')
+        modal: state.get('modal'),
+        isLoading: state.get('loading').get('active')
     }
 }
 
