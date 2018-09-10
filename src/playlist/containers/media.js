@@ -1,12 +1,11 @@
 import React, { Component } from 'react';
 import Media from '../components/media';
 import { connect } from 'react-redux';
-import * as actions from "../../actions";
-import { bindActionCreators } from 'redux';
+import { openModal } from "../../actions";
 
 class MediaContainer extends Component {
     openModal = (id) => {
-        this.props.actions.openModal(id);
+        this.props.openModal(id);
     };
 
     render() {
@@ -23,10 +22,8 @@ function mapStateToProps(state, props) {
     }
 }
 
-function mapDispatchToProps(dispatch) {
-    return {
-        actions: bindActionCreators(actions, dispatch)
-    }
-}
+const mapDispatchToProps = {
+    openModal
+};
 
 export default connect(mapStateToProps, mapDispatchToProps)(MediaContainer)
