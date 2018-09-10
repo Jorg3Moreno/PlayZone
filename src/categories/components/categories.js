@@ -32,7 +32,7 @@ function Categories(props) {
                             title           ={item.get('title')}
                             playlist        ={item.get('playlist')}
                             key             ={item.get('id')}
-                            handleOpenModal ={props.handleClick}
+                            // handleClick ={props.handleClick}
                         />
                     )
                 })

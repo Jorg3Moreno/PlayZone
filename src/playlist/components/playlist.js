@@ -11,7 +11,7 @@ function Playlist(props) {
                         <MediaContainer
                             id={mediaId}
                             key={mediaId}
-                            openModal={props.handleClick}
+                            // openModal={props.handleClick}
                         />
                     );
                 })
