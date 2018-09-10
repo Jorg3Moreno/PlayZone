@@ -1,7 +1,7 @@
 import React, {Component} from 'react';
 import Search from './../components/search';
 import { connect } from 'react-redux';
-import { searchEntities } from "../../actions";
+import { searchEntities, searchAsyncEntities } from "../../actions";
 
 class SearchContainer extends Component {
     state = {
@@ -10,7 +10,11 @@ class SearchContainer extends Component {
 
     handleSubmit = event => {
         event.preventDefault();
-        this.props.searchEntities(this.input.value);
+        // Ejample 1 of async function
+        // fetch(`http://miapi.com/buscar/${this.input.value}`).then((data) => {
+        //     this.props.searchEntities(this.input.value);
+        // });
+        this.props.searchAsyncEntities(this.input.value);
     };
 
     handleInputChange = event => {
@@ -36,7 +40,8 @@ class SearchContainer extends Component {
 }
 
 const mapDispatchToProps = {
-    searchEntities
+    searchEntities,
+    searchAsyncEntities
 };
 
 export default connect(null, mapDispatchToProps)(SearchContainer);

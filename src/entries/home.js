@@ -6,11 +6,18 @@ import { Provider } from 'react-redux';
 import reducer from '../reducers/index';
 import { Map as map } from 'immutable';
 import logger from 'redux-logger';
+import thunk from 'redux-thunk';
+import { composeWithDevTools } from 'redux-devtools-extension';
 
 const store = createStore(
     reducer,
     map(),
-    applyMiddleware(logger)
+    composeWithDevTools(
+        applyMiddleware(
+            logger,
+            thunk
+        )
+    )
 );
 
 const homeContainer = document.getElementById('home-container');

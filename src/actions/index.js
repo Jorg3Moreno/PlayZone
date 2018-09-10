@@ -1,7 +1,8 @@
 import {
     CLOSE_MODAL,
     OPEN_MODAL,
-    SEARCH_ENTITIES
+    SEARCH_ENTITIES,
+    SEARCH_ASYNC_ENTITIES
 } from "../action-types";
 
 export function openModal(mediaId) {
@@ -26,4 +27,13 @@ export function searchEntities(query) {
             query: query
         }
     };
+}
+
+export function searchAsyncEntities(query) {
+    return (dispatch) => {
+        // HERE FETCH OR XMLHTTPREQUEST
+        setTimeout(() => {
+            dispatch(searchEntities(query))
+        }, 5000)
+    }
 }
