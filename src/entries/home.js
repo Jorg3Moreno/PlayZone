@@ -1,40 +1,38 @@
 import React from 'react';
 import { render } from 'react-dom';
 import Home from '../pages/containers/home';
-import { createStore } from 'redux';
+import { createStore, applyMiddleware } from 'redux';
 import { Provider } from 'react-redux';
 import reducer from '../reducers/index';
 import { Map as map } from 'immutable';
 
-// const initialState = {
-//     data: {
-//         entities: normalizedData.entities,
-//         categories: normalizedData.result.categories,
-//         search: []
-//     },
-//     modal: {
-//         visibility: false,
-//         mediaId: null
+// function logger({ getState, dispatch}) {
+//     return (nextMiddleware) => {
+//         return (action) => {
+//             console.log('old state: ', getState().toJS());
+//             console.log('sending this action: ', action);
+//             const value = nextMiddleware(action);
+//             console.log('new state:', getState().toJS());
+//             return value;
+//         }
 //     }
-// };
+// }
+const logger = ({ getState, dispatch}) => nextMiddleware => action => {
+    console.log('old state: ', getState().toJS());
+    console.log('sending this action: ', action);
+    const value = nextMiddleware(action);
+    console.log('new state:', getState().toJS());
+    return value;
+};
 
 const store = createStore(
     reducer,
     map(),
-    window.__REDUX_DEVTOOLS_EXTENSION__ && window.__REDUX_DEVTOOLS_EXTENSION__()
+    // window.__REDUX_DEVTOOLS_EXTENSION__ && window.__REDUX_DEVTOOLS_EXTENSION__()
+    applyMiddleware(logger)
 );
 
 const homeContainer = document.getElementById('home-container');
-
-// ReactDOM.render(what?, where?)
-// render(
-//     <Media
-//         title="What is Responsive Design?"
-//         author="Jorge Moreno"
-//         image="./images/covers/responsive.jpg"
-//         type="video"/>,
-//     app
-// );
 
 render(
     <Provider store={store}>
